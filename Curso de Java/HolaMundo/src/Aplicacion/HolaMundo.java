@@ -15,8 +15,6 @@ class Programa implements Runnable{
 
 public class HolaMundo {
 
-	Programa programa1;
-	
 	public static void main(String[] args) {
 		
 		System.out.println("Hola Mundo!!! Desde el hilo: "+ Thread.currentThread().getName());

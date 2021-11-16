@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PracticaMapYReduce {
+public class PracticaMap {
 
 	public static void main(String[] args) {
 
@@ -40,7 +40,26 @@ public class PracticaMapYReduce {
 		
 		System.out.println("");
 		
+		/*Con .parallel se ejecuta en diferentes hilos*/
 		lista1.stream().parallel().map(item -> Math.pow(item, 2)).forEach( cuadrado -> System.out.println("cuadrado: " + cuadrado));
+		
+		//Encadenamos operaciones con map y filter.
+		List<Double> resultado = lista1.stream()
+									.map(item -> item - 3)
+									.filter(item -> item > 1.0F)
+									.map(item -> Math.pow(item, 2))
+									.filter(item -> item > 2.0F)
+									.collect(Collectors.toList());
+		
+		System.out.println("Resultado : " + resultado);
+		
+		//Otra forma de hacer lo mismo y mostrarlo por pantalla
+		lista1.stream()
+			.map(item -> item - 3)
+			.filter(item -> item > 1.0F)
+			.map(item -> Math.pow(item, 2))
+			.filter(item -> item > 2.0F)
+			.forEach(item -> System.out.println(item));
 		
 	}
 

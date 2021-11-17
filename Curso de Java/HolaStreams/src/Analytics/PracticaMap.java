@@ -18,6 +18,7 @@ public class PracticaMap {
 		
 		System.out.println("Lista inicial: " + lista1);
 		
+		//Sacar por pantalla la lista anterior multiplicado por dos
 		List<Float> listfloat = lista1.stream().map(item -> item * 2).collect(Collectors.toList());
 		System.out.println("listfloat: " + listfloat);
 		

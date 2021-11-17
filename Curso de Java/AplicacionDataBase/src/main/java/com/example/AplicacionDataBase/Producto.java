@@ -1,10 +1,16 @@
 package com.example.AplicacionDataBase;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Producto {
 	
+	@Id
 	private Long id;
+	
 	private String nombre;
+	
 	private Float precio;
 	
 	public Long getId() {

@@ -18,29 +18,30 @@ public class HolaMundo implements CommandLineRunner {
 	@Autowired
 	private ProductoRepositorio repositorio;
 	
+	@Autowired
+	private ProductoServicio productoServicio;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Producto producto1 = new Producto();
+		//Creación de dos productos usando el constructor con parámetros
+		Producto producto1 = new Producto(1L, "Libro Fundación", 3.0F); 
+		Producto producto2 = new Producto(2L, "Coche", 2.0F); 
 		
-		producto1.setId(1L);
-		producto1.setNombre("Libro Fundación");
-		producto1.setPrecio(3.0F);
+		//Metemos el producto1 en base de datos
+		//repositorio.save(producto1); //-> También se puede hacer de esta forma
+		productoServicio.crearProducto(producto1);
 		
-		Producto producto2 = new Producto();
-		
-		producto2.setId(2L);
-		producto2.setNombre("Coche");
-		producto2.setPrecio(2.0F);
-		
-		repositorio.save(producto1);
+		repositorio.save(producto2);
+		//producto2.setNombre("Nuevo nombre");
 		repositorio.save(producto2);
 		
 		Optional<Producto> productoLeido = repositorio.findById(2L);
 		
 		if (productoLeido.isPresent()) {
 			Producto p = productoLeido.get();
-			log.info("El producto es: {} {} {}", p.getId(), p.getNombre(), p.getPrecio() );
+			//log.info("El producto es: {} {} {}", p.getId(), p.getNombre(), p.getPrecio() );
+			log.info("El producto es: {}", p);
 		}
 		else {
 			log.error("El producto no se ha encontrado");
@@ -55,7 +56,7 @@ public class HolaMundo implements CommandLineRunner {
 		
 		repositorio.findAll()
 			.stream()
-			.forEach(elemento -> log.info("El producto (foreach) es: {} {} {}", elemento.getId(), elemento.getNombre(), elemento.getPrecio()));
+			.forEach(elemento -> log.info("{}", elemento));
 		
 	}
 	
